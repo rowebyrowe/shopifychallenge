@@ -9,16 +9,23 @@ Question 1: Given some sample data, write a program to answer the following: cli
 On Shopify, we have exactly 100 sneaker shops, and each of these shops sells only one model of shoe. We want to do some analysis of the average order value (AOV). When we look at orders data over a 30 day window, we naively calculate an AOV of $3145.13. Given that we know these shops are selling sneakers, a relatively affordable item, something seems wrong with our analysis. 
 
 Think about what could be going wrong with our calculation. Think about a better way to evaluate this data. 
+
 There were 17 outliers that were throwing off your AOV. Without the outliers, the average value becomes 723. Now, even this I find suspect. Shop 78 sells a sneaker that retails at $25,725 which I don't find very affordable. Taking that shop out makes the average $302.58, but I feel that I have dropped too much.
+
 What metric would you report for this dataset?
+
 I would use the average of the order order amount divided by the number of shoes ordered. 
+
 What is its value?
+
 That came out to be 387.84. Close to the after dropping average, but without the droppings.
 
 Question 2: For this question you’ll need to use SQL. Follow this link to access the data set required for the challenge. Please use queries to answer the following questions. Paste your queries along with your final numerical answers below.
 
 How many orders were shipped by Speedy Express in total?
+
 SELECT count(*) FROM Orders; 196
+
 What is the last name of the employee with the most orders?
 
 SELECT TOP 1 count(*),LastName from Orders as o
@@ -27,9 +34,10 @@ GROUP BY LastName
 ORDER BY count(*) DESC
 
 It was Peacock with 40 orders
+
 What product was ordered the most by customers in Germany?
 
-select top 2 productname,sum(quantity) as total,count(productname) as orders from ((Customers 
+SELECT top 2 productname,sum(quantity) as total,count(productname) as orders FROM ((Customers 
 	Inner join Orders on Customers.customerid = Orders.customerid)
 	INNER join OrderDetails on Orders.orderid = OrderDetails.orderid)
 	INNER join Products on OrderDetails.productid = Products.productid
